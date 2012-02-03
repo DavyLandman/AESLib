@@ -18,6 +18,25 @@
 #ifndef AESLIB_H
 #define AESLIB_H
 #include <stdint.h>
-void aes128_encrypt(uint8_t* key, uint8_t* iv, uint8_t* data, uint32_t data_len);
+// encrypt multiple blocks of 128bit data, data_len but be mod 16
+// key and iv are assumed to be both 128bit thus 16 uint8_t's
+void aes128_cbc_enc(uint8_t* key, uint8_t* iv, void* data, uint16_t data_len);
+
+// encrypt single 128bit block. data is assumed to be 16 uint8_t's
+// key and iv are assumed to be both 128bit thus 16 uint8_t's
+void aes128_enc_single(uint8_t* key, void* data);
+
+typedef void* aes_context;
+
+// prepare an encrypted to use for encrypting multiple blocks lateron.
+// key and iv are assumed to be both 128bit thus 16 uint8_t's
+aes_context aes128_cbc_enc_start(uint8_t* key, void* iv);
+
+// encrypt one or more blocks of 128bit data
+// data_len should be mod 16
+void aes128_cbc_enc_continue(aes_context ctx, void* data, uint16_t data_len);
+
+// cleanup encryption context
+void aes128_cbc_enc_finish(aes_context ctx);
 
 #endif
