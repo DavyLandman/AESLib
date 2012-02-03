@@ -79,3 +79,62 @@ void aes128_cbc_enc_finish(aes_context ctx){
 	bcal_cbc_free((bcal_cbc_ctx_t*)ctx);
 	free(ctx);
 }
+
+
+
+// decrypt multiple blocks of 128bit data, data_len but be mod 16
+// key and iv are assumed to be both 128bit thus 16 uint8_t's
+void aes128_cbc_dec(uint8_t* key, uint8_t* iv, void* data, uint16_t data_len){
+	if (data_len % 16 != 0) {
+		return;
+	}
+	bcal_cbc_ctx_t ctx;
+	uint8_t r;
+	r = bcal_cbc_init(&aes128_desc, key, 128, &ctx);
+	if (r) {
+		return;
+	}
+	bcal_cbc_decMsg(iv, data, data_len / 16, &ctx);
+	bcal_cbc_free(&ctx);
+}
+
+// decrypt single 128bit block. data is assumed to be 16 uint8_t's
+// key and iv are assumed to be both 128bit thus 16 uint8_t's
+void aes128_dec_single(uint8_t* key, void* data){
+	aes128_ctx_t ctx;
+	aes128_init(key, &ctx);
+	aes128_dec(data, &ctx);
+}
+
+// prepare an decrypted to use for decrypting multiple blocks lateron.
+// key and iv are assumed to be both 128bit thus 16 uint8_t's
+aes_context aes128_cbc_dec_start(uint8_t* key, void* iv){
+	bcal_cbc_ctx_t* ctx = (bcal_cbc_ctx_t*)malloc(sizeof(bcal_cbc_ctx_t));
+	uint8_t r = bcal_cbc_init(&aes128_desc, key, 128, ctx);
+	if (r) {
+		free(ctx);
+		return NULL;
+	}
+	bcal_cbc_loadIV(iv, ctx);
+	return (aes_context)ctx;
+}
+
+// decrypt one or more blocks of 128bit data
+// data_len should be mod 16
+void aes128_cbc_dec_continue(aes_context ctx, void* data, uint16_t data_len){
+	if (data_len % 16 != 0) {
+		return;
+	}
+	bcal_cbc_ctx_t* _ctx = (bcal_cbc_ctx_t*)ctx;
+	uint16_t msg_blocks = data_len / 16;
+	while(msg_blocks--){
+		bcal_cbc_decNext(data, _ctx);
+		data = (uint8_t*)data + _ctx->blocksize_B;
+	}
+}
+
+// cleanup decryption context
+void aes128_cbc_dec_finish(aes_context ctx){
+	bcal_cbc_free((bcal_cbc_ctx_t*)ctx);
+	free(ctx);
+}

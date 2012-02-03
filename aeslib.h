@@ -39,4 +39,22 @@ void aes128_cbc_enc_continue(aes_context ctx, void* data, uint16_t data_len);
 // cleanup encryption context
 void aes128_cbc_enc_finish(aes_context ctx);
 
+// decrypt multiple blocks of 128bit data, data_len but be mod 16
+// key and iv are assumed to be both 128bit thus 16 uint8_t's
+void aes128_cbc_dec(uint8_t* key, uint8_t* iv, void* data, uint16_t data_len);
+
+// decrypt single 128bit block. data is assumed to be 16 uint8_t's
+// key and iv are assumed to be both 128bit thus 16 uint8_t's
+void aes128_dec_single(uint8_t* key, void* data);
+
+// prepare an decrypter to use for decrypting multiple blocks lateron.
+// key and iv are assumed to be both 128bit thus 16 uint8_t's
+aes_context aes128_cbc_dec_start(uint8_t* key, void* iv);
+
+// decrypt one or more blocks of 128bit data
+// data_len should be mod 16
+void aes128_cbc_dec_continue(aes_context ctx, void* data, uint16_t data_len);
+
+// cleanup decryption context
+void aes128_cbc_dec_finish(aes_context ctx);
 #endif
