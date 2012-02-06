@@ -34,16 +34,20 @@ The library supports 3 kinds of operations.
 
 The single block enc/decryption are the following methods:
 
-	void aes128_enc_single(uint8_t* key, void* data);
-	void aes128_dec_single(uint8_t* key, void* data);
+```c
+void aes128_enc_single(uint8_t* key, void* data);
+void aes128_dec_single(uint8_t* key, void* data);
+```
 
 Usage example:
-
-	uint8_t[] key = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
-	char[] data = "0123456789012345"; //16 chars == 16 bytes
-	aes128_enc_single(key, data);
-	Serial.print("encrypted:");
-	Serial.println(data);
-	aes128_dec_single(key, data);
-	Serial.print("decrypted:");
-	Serial.println(data);
+	
+```c
+uint8_t[] key = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+char[] data = "0123456789012345"; //16 chars == 16 bytes
+aes128_enc_single(key, data);
+Serial.print("encrypted:");
+Serial.println(data);
+aes128_dec_single(key, data);
+Serial.print("decrypted:");
+Serial.println(data);
+```
