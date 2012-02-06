@@ -18,6 +18,9 @@
 #ifndef AESLIB_H
 #define AESLIB_H
 #include <stdint.h>
+#ifdef __cplusplus
+extern "C"{
+#endif
 // encrypt multiple blocks of 128bit data, data_len but be mod 16
 // key and iv are assumed to be both 128bit thus 16 uint8_t's
 void aes128_cbc_enc(uint8_t* key, uint8_t* iv, void* data, uint16_t data_len);
@@ -57,4 +60,7 @@ void aes128_cbc_dec_continue(aes_context ctx, void* data, uint16_t data_len);
 
 // cleanup decryption context
 void aes128_cbc_dec_finish(aes_context ctx);
+#ifdef __cplusplus
+}
+#endif
 #endif
