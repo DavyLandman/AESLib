@@ -14,8 +14,8 @@ Installation
 ------------
 
 - Download the files in this repository (using either clone or the download button)
-- Copy the `aeslib` folder into `libraries` folder (same level as your `sketch` folder)
-- add `#include <aeslib.h>` in your sketch.
+- Copy the `AESLib` folder into `libraries` folder (same level as your `sketch` folder)
+- add `#include <AESLib.h>` in your sketch.
 
 
 Usage
