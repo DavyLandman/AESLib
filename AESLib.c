@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "aeslib.h"
+#include "AESLib.h"
 #include <stdint.h>
 #include "aes.h"
 #include "blockcipher_descriptor.h"
@@ -25,7 +25,7 @@
 
 // encrypt multiple blocks of 128bit data, data_len but be mod 16
 // key and iv are assumed to be both 128bit thus 16 uint8_t's
-void aes128_cbc_enc(uint8_t* key, uint8_t* iv, void* data, uint16_t data_len){
+void aes128_cbc_enc(const uint8_t* key, const uint8_t* iv, void* data, const uint16_t data_len){
 	if (data_len % 16 != 0) {
 		return;
 	}
@@ -41,7 +41,7 @@ void aes128_cbc_enc(uint8_t* key, uint8_t* iv, void* data, uint16_t data_len){
 
 // encrypt single 128bit block. data is assumed to be 16 uint8_t's
 // key and iv are assumed to be both 128bit thus 16 uint8_t's
-void aes128_enc_single(uint8_t* key, void* data){
+void aes128_enc_single(const uint8_t* key, void* data){
 	aes128_ctx_t ctx;
 	aes128_init(key, &ctx);
 	aes128_enc(data, &ctx);
@@ -49,7 +49,7 @@ void aes128_enc_single(uint8_t* key, void* data){
 
 // prepare an encrypted to use for encrypting multiple blocks lateron.
 // key and iv are assumed to be both 128bit thus 16 uint8_t's
-aes_context aes128_cbc_enc_start(uint8_t* key, void* iv){
+aes_context aes128_cbc_enc_start(const uint8_t* key, const void* iv){
 	bcal_cbc_ctx_t* ctx = (bcal_cbc_ctx_t*)malloc(sizeof(bcal_cbc_ctx_t));
 	uint8_t r = bcal_cbc_init(&aes128_desc, key, 128, ctx);
 	if (r) {
@@ -62,7 +62,7 @@ aes_context aes128_cbc_enc_start(uint8_t* key, void* iv){
 
 // encrypt one or more blocks of 128bit data
 // data_len should be mod 16
-void aes128_cbc_enc_continue(aes_context ctx, void* data, uint16_t data_len){
+void aes128_cbc_enc_continue(const aes_context ctx, void* data, const uint16_t data_len){
 	if (data_len % 16 != 0) {
 		return;
 	}
@@ -75,7 +75,7 @@ void aes128_cbc_enc_continue(aes_context ctx, void* data, uint16_t data_len){
 }
 
 // cleanup encryption context
-void aes128_cbc_enc_finish(aes_context ctx){
+void aes128_cbc_enc_finish(const aes_context ctx){
 	bcal_cbc_free((bcal_cbc_ctx_t*)ctx);
 	free(ctx);
 }
@@ -84,7 +84,7 @@ void aes128_cbc_enc_finish(aes_context ctx){
 
 // decrypt multiple blocks of 128bit data, data_len but be mod 16
 // key and iv are assumed to be both 128bit thus 16 uint8_t's
-void aes128_cbc_dec(uint8_t* key, uint8_t* iv, void* data, uint16_t data_len){
+void aes128_cbc_dec(const uint8_t* key, const uint8_t* iv, void* data, const uint16_t data_len){
 	if (data_len % 16 != 0) {
 		return;
 	}
@@ -100,7 +100,7 @@ void aes128_cbc_dec(uint8_t* key, uint8_t* iv, void* data, uint16_t data_len){
 
 // decrypt single 128bit block. data is assumed to be 16 uint8_t's
 // key and iv are assumed to be both 128bit thus 16 uint8_t's
-void aes128_dec_single(uint8_t* key, void* data){
+void aes128_dec_single(const uint8_t* key, void* data){
 	aes128_ctx_t ctx;
 	aes128_init(key, &ctx);
 	aes128_dec(data, &ctx);
@@ -108,7 +108,7 @@ void aes128_dec_single(uint8_t* key, void* data){
 
 // prepare an decrypted to use for decrypting multiple blocks lateron.
 // key and iv are assumed to be both 128bit thus 16 uint8_t's
-aes_context aes128_cbc_dec_start(uint8_t* key, void* iv){
+aes_context aes128_cbc_dec_start(const uint8_t* key, const void* iv){
 	bcal_cbc_ctx_t* ctx = (bcal_cbc_ctx_t*)malloc(sizeof(bcal_cbc_ctx_t));
 	uint8_t r = bcal_cbc_init(&aes128_desc, key, 128, ctx);
 	if (r) {
@@ -121,7 +121,7 @@ aes_context aes128_cbc_dec_start(uint8_t* key, void* iv){
 
 // decrypt one or more blocks of 128bit data
 // data_len should be mod 16
-void aes128_cbc_dec_continue(aes_context ctx, void* data, uint16_t data_len){
+void aes128_cbc_dec_continue(const aes_context ctx, void* data, const uint16_t data_len){
 	if (data_len % 16 != 0) {
 		return;
 	}
@@ -134,7 +134,7 @@ void aes128_cbc_dec_continue(aes_context ctx, void* data, uint16_t data_len){
 }
 
 // cleanup decryption context
-void aes128_cbc_dec_finish(aes_context ctx){
+void aes128_cbc_dec_finish(const aes_context ctx){
 	bcal_cbc_free((bcal_cbc_ctx_t*)ctx);
 	free(ctx);
 }
