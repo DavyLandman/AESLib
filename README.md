@@ -34,7 +34,7 @@ The library supports 3 kinds of operations.
 
 The single block enc/decryption are the following methods:
 
-```code
+```c
 void aes128_enc_single(const uint8_t* key, void* data);
 void aes128_dec_single(const uint8_t* key, void* data);
 ```
