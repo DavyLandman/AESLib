@@ -34,14 +34,15 @@ The library supports 3 kinds of operations.
 
 The single block enc/decryption are the following methods:
 
-```c
-void aes128_enc_single(uint8_t* key, void* data);
-void aes128_dec_single(uint8_t* key, void* data);
+```code
+void aes128_enc_single(const uint8_t* key, void* data);
+void aes128_dec_single(const uint8_t* key, void* data);
 ```
 
 Usage example:
 	
 ```c
+Serial.begin(57600);
 uint8_t[] key = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
 char[] data = "0123456789012345"; //16 chars == 16 bytes
 aes128_enc_single(key, data);
