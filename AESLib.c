@@ -47,9 +47,9 @@ void aes128_enc_single(const uint8_t* key, void* data){
 	aes128_enc(data, &ctx);
 }
 
-// encrypt single 128bit block. data is assumed to be 16 uint8_t's
-// key and iv are assumed to be both 128bit thus 16 uint8_t's
-void aes256_enc_single(const uint16_t* key, void* data){
+// encrypt single 256bit block. data is assumed to be 32 uint8_t's
+// key and iv are assumed to be both 256bit thus 32 uint8_t's
+void aes256_enc_single(const uint8_t* key, void* data){
 	aes256_ctx_t ctx;
 	aes256_init(key, &ctx);
 	aes256_enc(data, &ctx);
@@ -115,9 +115,9 @@ void aes128_dec_single(const uint8_t* key, void* data){
 	aes128_dec(data, &ctx);
 }
 
-// decrypt single 128bit block. data is assumed to be 16 uint8_t's
-// key and iv are assumed to be both 128bit thus 16 uint8_t's
-void aes256_dec_single(const uint16_t* key, void* data){
+// decrypt single 256bit block. data is assumed to be 32 uint8_t's
+// key and iv are assumed to be both 256bit thus 32 uint8_t's
+void aes256_dec_single(const uint8_t* key, void* data){
 	aes256_ctx_t ctx;
 	aes256_init(key, &ctx);
 	aes256_dec(data, &ctx);
