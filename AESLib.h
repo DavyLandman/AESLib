@@ -26,11 +26,11 @@ extern "C"{
 void aes128_cbc_enc(const uint8_t* key, const uint8_t* iv, void* data, const uint16_t data_len);
 
 // encrypt single 128bit block. data is assumed to be 16 uint8_t's
-// key and iv are assumed to be both 128bit thus 16 uint8_t's
+// key is assumed to be 128bit thus 16 uint8_t's
 void aes128_enc_single(const uint8_t* key, void* data);
 
-// encrypt single 256bit block. data is assumed to be 32 uint8_t's
-// key and iv are assumed to be both 256bit thus 32 uint8_t's
+// encrypt single 128bit block. data is assumed to be 16 uint8_t's
+// key is assumed to be 256bit thus 32 uint8_t's
 void aes256_enc_single(const uint8_t* key, void* data);
 
 typedef void* aes_context;
@@ -51,11 +51,11 @@ void aes128_cbc_enc_finish(const aes_context ctx);
 void aes128_cbc_dec(const uint8_t* key, const uint8_t* iv, void* data, const uint16_t data_len);
 
 // decrypt single 128bit block. data is assumed to be 16 uint8_t's
-// key and iv are assumed to be both 128bit thus 16 uint8_t's
+// key is assumed to be 128bit thus 16 uint8_t's
 void aes128_dec_single(const uint8_t* key, void* data);
 
-// decrypt single 256bit block. data is assumed to be 32 uint8_t's
-// key and iv are assumed to be both 256bit thus 32 uint8_t's
+// decrypt single 128bit block. data is assumed to be 16 uint8_t's
+// key is assumed to be 256bit thus 32 uint8_t's
 void aes256_dec_single(const uint8_t* key, void* data);
 
 // prepare an decrypter to use for decrypting multiple blocks lateron.
