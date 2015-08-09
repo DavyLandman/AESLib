@@ -1,7 +1,7 @@
 Arduino AESLib 
 ==============
 
-This project is just an Arduino ready extract from the AVR-Crypto-Lib.
+This project is just an Arduino ready extract from the [AVR-Crypto-Lib](https://github.com/cantora/avr-crypto-lib).
 
 It only packages the ASM implementations of AES into a library ready to use in
 Arduino IDE.
