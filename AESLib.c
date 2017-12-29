@@ -64,8 +64,8 @@ void aes128_enc_single(const uint8_t* key, void* data){
 	aes128_enc(data, &ctx);
 }
 
-// encrypt multiple blocks of 128bit data, data_len but be mod 16
-// key is assumed to be 256bit thus 32 uint8_t's
+// encrypt multiple blocks of 128bit data, data_len must be mod 16
+// key is assumed to be 128bit thus 16 uint8_t's
 void aes128_enc_multiple(const uint8_t* key, void* data, const uint16_t data_len){
 	if (data_len % 16 != 0) {
 		return;
@@ -202,8 +202,8 @@ void aes128_dec_single(const uint8_t* key, void* data){
 	aes128_dec(data, &ctx);
 }
 
-// decrypt multiple blocks of 128bit data, data_len but be mod 16
-// key is assumed to be 128bit thus 32 uint8_t's
+// decrypt multiple blocks of 128bit data, data_len must be mod 16
+// key is assumed to be 128bit thus 16 uint8_t's
 void aes128_dec_multiple(const uint8_t* key, void* data, const uint16_t data_len){
 	if (data_len % 16 != 0) {
 		return;
