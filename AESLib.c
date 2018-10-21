@@ -58,7 +58,7 @@ void aes192_cbc_enc(const uint8_t* key, const uint8_t* iv, void* data, const uin
 
 // encrypt single 128bit block. data is assumed to be 16 uint8_t's
 // key and iv are assumed to be both 128bit thus 16 uint8_t's
-void aes128_enc_single(const uint8_t* key, uint8_t* data){
+void aes128_enc_single(const uint8_t* key, void* data){
 	aes128_ctx_t ctx;
 	aes128_init(key, &ctx);
 	aes128_enc(data, &ctx);
@@ -66,7 +66,7 @@ void aes128_enc_single(const uint8_t* key, uint8_t* data){
 
 // encrypt multiple blocks of 128bit data, data_len must be mod 16
 // key is assumed to be 128bit thus 16 uint8_t's
-void aes128_enc_multiple(const uint8_t* key, uint8_t* data, const uint16_t data_len){
+void aes128_enc_multiple(const uint8_t* key, void* data, const uint16_t data_len){
 	if (data_len % 16 != 0) {
 		return;
 	}
@@ -86,7 +86,7 @@ void aes256_enc_single(const uint8_t* key, void* data){
 
 // encrypt multiple blocks of 128bit data, data_len but be mod 16
 // key is assumed to be 256bit thus 32 uint8_t's
-void aes256_enc_multiple(const uint8_t* key, uint8_t* data, const uint16_t data_len){
+void aes256_enc_multiple(const uint8_t* key, void* data, const uint16_t data_len){
 	if (data_len % 16 != 0) {
 		return;
 	}
@@ -196,7 +196,7 @@ void aes192_cbc_dec(const uint8_t* key, const uint8_t* iv, void* data, const uin
 
 // decrypt single 128bit block. data is assumed to be 16 uint8_t's
 // key is assumed to be 128bit thus 16 uint8_t's
-void aes128_dec_single(const uint8_t* key, uint8_t* data){
+void aes128_dec_single(const uint8_t* key, void* data){
 	aes128_ctx_t ctx;
 	aes128_init(key, &ctx);
 	aes128_dec(data, &ctx);
@@ -204,7 +204,7 @@ void aes128_dec_single(const uint8_t* key, uint8_t* data){
 
 // decrypt multiple blocks of 128bit data, data_len must be mod 16
 // key is assumed to be 128bit thus 16 uint8_t's
-void aes128_dec_multiple(const uint8_t* key, uint8_t* data, const uint16_t data_len){
+void aes128_dec_multiple(const uint8_t* key, void* data, const uint16_t data_len){
 	if (data_len % 16 != 0) {
 		return;
 	}
@@ -224,7 +224,7 @@ void aes256_dec_single(const uint8_t* key, void* data){
 
 // decrypt multiple blocks of 128bit data, data_len but be mod 16
 // key is assumed to be 256bit thus 32 uint8_t's
-void aes256_dec_multiple(const uint8_t* key, uint8_t* data, const uint16_t data_len){
+void aes256_dec_multiple(const uint8_t* key, void* data, const uint16_t data_len){
 	if (data_len % 16 != 0) {
 		return;
 	}
