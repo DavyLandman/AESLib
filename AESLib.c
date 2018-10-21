@@ -72,8 +72,13 @@ void aes128_enc_multiple(const uint8_t* key, void* data, const uint16_t data_len
 	}
 	aes128_ctx_t ctx;
 	aes128_init(key, &ctx);
-	for(int i=0;i<data_len/16;i++)
-		aes128_enc(&data[i*16], &ctx);
+
+	uint8_t* current = (uint8_t*)data;
+	uint8_t* stop = current + data_len;
+	while(current != stop){
+	    aes128_enc(current, &ctx);
+	    current += 16;
+	}
 }
 
 // encrypt single 128bit block. data is assumed to be 16 uint8_t's
@@ -92,8 +97,13 @@ void aes256_enc_multiple(const uint8_t* key, void* data, const uint16_t data_len
 	}
 	aes256_ctx_t ctx;
 	aes256_init(key, &ctx);
-	for(int i=0;i<data_len/16;i++)
-		aes256_enc(&data[i*16], &ctx);
+
+	uint8_t* current = (uint8_t*)data;
+	uint8_t* stop = current + data_len;
+	while(current != stop){
+	    aes256_enc(current, &ctx);
+	    current += 16;
+	}
 }
 
 // prepare an encrypted to use for encrypting multiple blocks lateron.
@@ -210,8 +220,13 @@ void aes128_dec_multiple(const uint8_t* key, void* data, const uint16_t data_len
 	}
 	aes128_ctx_t ctx;
 	aes128_init(key, &ctx);
-	for(int i=0;i<data_len/16;i++)
-		aes128_dec(&data[i*16], &ctx);
+
+	uint8_t* current = (uint8_t*)data;
+	uint8_t* stop = current + data_len;
+	while(current != stop) {
+	    aes128_dec(current, &ctx);
+	    current += 16;
+	}
 }
 
 // decrypt single 128bit block. data is assumed to be 16 uint8_t's
@@ -230,8 +245,13 @@ void aes256_dec_multiple(const uint8_t* key, void* data, const uint16_t data_len
 	}
 	aes256_ctx_t ctx;
 	aes256_init(key, &ctx);
-	for(int i=0;i<data_len/16;i++)
-		aes256_dec(&data[i*16], &ctx);
+
+	uint8_t* current = (uint8_t*)data;
+	uint8_t* stop = current + data_len;
+	while(current != stop) {
+	    aes256_dec(current, &ctx);
+	    current += 16;
+	}
 }
 
 
