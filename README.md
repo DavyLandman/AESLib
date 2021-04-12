@@ -1,3 +1,9 @@
+As people keep opening issues, a few notes:
+
+- This code is for AVR based arduino chips. So esp8266 is not supported. However, [Arduino ESP8266 has AES/CBC build in via BearSSL](https://arduino-esp8266.readthedocs.io/en/latest/esp8266wifi/bearssl-client-secure-class.html)
+- I would advice switching to [my portable Chacha20-Poly1305 library](https://github.com/DavyLandman/portable8439) it should compile on most boards. Has better cryptographic properties, and is often faster.
+
+
 Arduino AESLib 
 ==============
 
