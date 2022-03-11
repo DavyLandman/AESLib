@@ -91,6 +91,7 @@ void bcal_cmac_free(bcal_cmac_ctx_t* ctx){
 	free(ctx->accu);
 	free(ctx->k1);
 	free(ctx->k2);
+	free(ctx->lastblock);
 	bcal_cipher_free(&(ctx->cctx));
 }
 
