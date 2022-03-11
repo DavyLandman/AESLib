@@ -57,9 +57,11 @@ void bcal_cipher_free(bcgen_ctx_t* ctx){
 		return;
 	bc_free_fpt free_fpt;
 	free_fpt = (bc_free_fpt)(pgm_read_word(&(ctx->desc_ptr->free)));
-	if(free_fpt)
+	if(free_fpt) {
 		free_fpt((ctx->ctx));
-	free(ctx->ctx);
+	} else {
+		free(ctx->ctx);
+	}
 }
 
 void bcal_cipher_enc(void* block, const bcgen_ctx_t* ctx){
