@@ -34,6 +34,7 @@ void aes128_cbc_enc(const uint8_t* key, const uint8_t* iv, void* data, const uin
 	uint8_t r;
 	r = bcal_cbc_init(&aes128_desc, key, 128, &ctx);
 	if (r) {
+		bcal_cbc_free(&ctx);
 		return;
 	}
 	bcal_cbc_encMsg(iv, data, data_len / 16, &ctx);
@@ -50,6 +51,7 @@ void aes192_cbc_enc(const uint8_t* key, const uint8_t* iv, void* data, const uin
 	uint8_t r;
 	r = bcal_cbc_init(&aes192_desc, key, 192, &ctx);
 	if (r) {
+		bcal_cbc_free(&ctx);
 		return;
 	}
 	bcal_cbc_encMsg(iv, data, data_len / 16, &ctx);
